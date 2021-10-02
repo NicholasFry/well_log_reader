@@ -24,16 +24,16 @@ class Reader_cbl:
     def plot_a_log(self, for_that_well):
         plt.figure(figsize=(9,10)) 
         plt.subplot(1,2,1)
-        plt.plot((log_readouts[pick_a_well]['TT3FT']), (log_readouts[pick_a_well]['DEPT']), '.', color='blue')
-        plt.title(f"This is the time of return for the transmission \non {las_files[pick_a_well]}", pad=20, size=11)
-        plt.xlabel(f"{'TT3FT'} well log reading of the time wave on \na Variable Density Log"); plt.ylabel("Depth (ft)")
+        plt.plot((log_readouts[pick_a_well]['GGME']), (log_readouts[pick_a_well]['DEPT']), '.', color='blue')
+        plt.title(f"This is the MGS BH Corrected Gamma Ray Log \non {las_files[pick_a_well]}", pad=20, size=11)
+        plt.xlabel(f"{'GGME'} well log reading of the compensated gamma ray \nvalues from well {log_readouts[pick_a_well].well['WELL'].value}"); plt.ylabel("Depth (ft)")
         plt.grid(True)#Define the line properties of the grid
         plt.gca().invert_yaxis()
 
         plt.subplot(1,2,2)
-        p1 = plt.plot(log_readouts[pick_a_well]['AMP3FT'], (log_readouts[pick_a_well]['DEPT']), '.', color='red')
-        plt.title(f"This is the sound wave amplitude \nof {las_files[pick_a_well]}", pad=20, size=11)
-        plt.xlabel(f"'AMP3FT' well log reading from {las_files[pick_a_well]} of the amplitude\nof the sound wave in the Cement Bond Log"); plt.ylabel("Depth (ft)")
+        p1 = plt.plot(log_readouts[pick_a_well]['DEN'], (log_readouts[pick_a_well]['DEPT']), '.', color='red')
+        plt.title(f"This is the Compensated Density \nof {las_files[pick_a_well]}", pad=20, size=11)
+        plt.xlabel(f"'DEN' well log reading from \n{log_readouts[pick_a_well].well['WELL'].value}; compensated density"); plt.ylabel("Depth (ft)")
         plt.grid(True)
         plt.gca().invert_yaxis()#get the current axes (gca), then invert the y-axis
 
@@ -42,16 +42,16 @@ class Reader_cbl:
     def save_plot_a_log(self, for_that_well, dpi_user = 300):
         plt.figure(figsize=(9,10)) 
         plt.subplot(1,2,1)
-        plt.plot((log_readouts[pick_a_well]['TT3FT']), (log_readouts[pick_a_well]['DEPT']), '.', color='blue')
-        plt.title(f"This is the time of return for the transmission \non {las_files[pick_a_well]}", pad=20, size=11)
-        plt.xlabel(f"{'TT3FT'} well log reading of the time wave on \na Variable Density Log"); plt.ylabel("Depth (ft)")
+        plt.plot((log_readouts[pick_a_well]['GGME']), (log_readouts[pick_a_well]['DEPT']), '.', color='blue')
+        plt.title(f"This is the MGS BH Corrected Gamma Ray Log \non {las_files[pick_a_well]}", pad=20, size=11)
+        plt.xlabel(f"{'GGME'} well log reading of the compensated gamma ray \nvalues from well {log_readouts[pick_a_well].well['WELL'].value}"); plt.ylabel("Depth (ft)")
         plt.grid(True)
         plt.gca().invert_yaxis()
         #another subplot, adjacent on the x-axis. The subplot function considers this the next column.
         plt.subplot(1,2,2)
-        p1 = plt.plot(log_readouts[pick_a_well]['AMP3FT'], (log_readouts[pick_a_well]['DEPT']), '.', color='red')
-        plt.title(f"This is the sound wave amplitude \nof {las_files[pick_a_well]}", pad=20, size=11)
-        plt.xlabel(f"'AMP3FT' well log reading from {las_files[pick_a_well]} of the amplitude\nof the sound wave in the Cement Bond Log"); plt.ylabel("Depth (ft)")
+        p1 = plt.plot(log_readouts[pick_a_well]['DEN'], (log_readouts[pick_a_well]['DEPT']), '.', color='red')
+        plt.title(f"This is the Compensated Density \nof {las_files[pick_a_well]}", pad=20, size=11)
+        plt.xlabel(f"'DEN' well log reading \nfrom {log_readouts[pick_a_well].well['WELL'].value}; compensated density"); plt.ylabel("Depth (ft)")
         plt.grid(True)
         plt.gca().invert_yaxis()
 
@@ -63,22 +63,22 @@ class Reader_cbl:
     def plot_a_log_with_hlines(self, for_that_well, top_line, bottom_line, x_min_vdl, x_max_vdl, x_min_amp, x_max_amp):
         plt.figure(figsize=(9,10)) 
         plt.subplot(1,2,1)
-        plt.plot((log_readouts[pick_a_well]['TT3FT']), (log_readouts[pick_a_well]['DEPT']), '.', color='blue')
+        plt.plot((log_readouts[pick_a_well]['GGME']), (log_readouts[pick_a_well]['DEPT']), '.', color='blue')
         plt.hlines(top_line, x_min_vdl, x_max_vdl, color = 'black', linestyles= 'dashdot', label='Area of Concern Specified by User', zorder = 3)
         plt.hlines(bottom_line, x_min_vdl, x_max_vdl, color = 'black', linestyles= 'dashdot', zorder = 3)
-        plt.title(f"This is the time of return for the transmission \non {las_files[pick_a_well]}", pad=20, size=11)
+        plt.title(f"This is the MGS BH Corrected Gamma \non {las_files[pick_a_well]}", pad=20, size=11)
         plt.legend()
-        plt.xlabel(f"{'TT3FT'} well log reading of the time wave on \na Variable Density Log"); plt.ylabel("Depth (ft)")
+        plt.xlabel(f"{'GGME'} well log reading of the time wave on \na Variable Density Log"); plt.ylabel("Depth (ft)")
         plt.grid(True)#Define the line properties of the grid
         plt.gca().invert_yaxis()
 
         plt.subplot(1,2,2)
-        p1 = plt.plot(log_readouts[pick_a_well]['AMP3FT'], (log_readouts[pick_a_well]['DEPT']), '.', color='red')
+        p1 = plt.plot(log_readouts[pick_a_well]['DEN'], (log_readouts[pick_a_well]['DEPT']), '.', color='red')
         plt.hlines(top_line, x_min_amp, x_max_amp, color = 'black', linestyles= 'dashdot', label='Area of Concern Specified by User', zorder = 3)
         plt.hlines(bottom_line, x_min_amp, x_max_amp, color = 'black', linestyles= 'dashdot', zorder = 3)
         plt.title(f"This is the sound wave amplitude \nof {las_files[pick_a_well]}", pad=20, size=11)
         plt.legend()
-        plt.xlabel(f"'AMP3FT' well log reading from {las_files[pick_a_well]} of the amplitude\nof the sound wave in the Cement Bond Log"); plt.ylabel("Depth (ft)")
+        plt.xlabel(f"'DEN' well log reading \nfrom {log_readouts[pick_a_well].well['WELL'].value} of the compensated density"); plt.ylabel("Depth (ft)")
         plt.grid(True)#Define the line properties of the grid
         plt.gca().invert_yaxis()
 
@@ -88,22 +88,22 @@ class Reader_cbl:
     def save_plot_a_log_with_hlines(self, for_that_well, top_line, bottom_line, x_min_vdl, x_max_vdl, x_min_amp, x_max_amp, dpi_user = 300):
         plt.figure(figsize=(9,10)) 
         plt.subplot(1,2,1)
-        plt.plot((log_readouts[pick_a_well]['TT3FT']), (log_readouts[pick_a_well]['DEPT']), '.', color='blue')
+        plt.plot((log_readouts[pick_a_well]['GGME']), (log_readouts[pick_a_well]['DEPT']), '.', color='blue')
         plt.hlines(top_line, x_min_vdl, x_max_vdl, color = 'black', linestyles= 'dashdot', label='Area of Concern Specified by User', zorder = 3)
         plt.hlines(bottom_line, x_min_vdl, x_max_vdl, color = 'black', linestyles= 'dashdot', zorder = 3)#I think specifying the zorder above 2 makes it display on top
-        plt.title(f"This is the time of return for the transmission \non {las_files[pick_a_well]}", pad=20, size=11)
+        plt.title(f"This is the MGS BH Corrected Gamma \non {las_files[pick_a_well]}", pad=20, size=11)
         plt.legend()
-        plt.xlabel("'TT3FT' well log reading of the time wave on \na Variable Density Log"); plt.ylabel("Depth (ft)")
+        plt.xlabel("'GGME' well log reading of the gamma ray \na MGS BH Corrected Gamma"); plt.ylabel("Depth (ft)")
         plt.grid(True)#Define the line properties of the grid
         plt.gca().invert_yaxis()
 
         plt.subplot(1,2,2)
-        p1 = plt.plot(log_readouts[pick_a_well]['AMP3FT'], (log_readouts[pick_a_well]['DEPT']), '.', color='red')
+        p1 = plt.plot(log_readouts[pick_a_well]['DEN'], (log_readouts[pick_a_well]['DEPT']), '.', color='red')
         plt.hlines(top_line, x_min_amp, x_max_amp, color = 'black', linestyles= 'dashdot', label='Area of Concern Specified by User', zorder = 3)
         plt.hlines(bottom_line, x_min_amp, x_max_amp, color = 'black', linestyles= 'dashdot', zorder = 3)
-        plt.title(f"This is the sound wave amplitude \nof {las_files[pick_a_well]}", pad=20, size=11)
+        plt.title(f"This is the compensated density \nof {las_files[pick_a_well]}", pad=20, size=11)
         plt.legend()
-        plt.xlabel(f"'AMP3FT' well log reading from {las_files[pick_a_well]} of the amplitude\nof the sound wave in the Cement Bond Log"); plt.ylabel("Depth (ft)")
+        plt.xlabel(f"'DEN' well log reading \nfrom {log_readouts[pick_a_well].well['WELL'].value} of the compensated density\nof the formation"); plt.ylabel("Depth (ft)")
         plt.grid(True)#Define the line properties of the grid
         plt.gca().invert_yaxis()
 
@@ -118,7 +118,7 @@ class PDF(FPDF):
         self.rect(.2, .2, 8.0,10.5)#this is the rectangle outside
     def header(self):
         self.set_font('Arial', 'B', 18)# Arial bold 18         
-        self.cell(w=7.7, h=1.5, align='C', txt=f"Cement Bond Log Report for {well}", border=0)# Title. The w adjusts the size of the box the text floats in. Show the border if you want to find out where it is.
+        self.cell(w=7.7, h=1.5, align='C', txt=f"Gamma Ray & Density Log Report for {well}", border=0)# Title. The w adjusts the size of the box the text floats in. Show the border if you want to find out where it is.
         self.set_text_color(220, 50, 50)#text color       
     def plots(self):
         self.image('well_report_plot.jpeg', 1.5, 1.3, 5.1, 7)
@@ -130,15 +130,15 @@ class PDF(FPDF):
         today = date.today()#today's date in the pdf report, next to well logger notes
         self.set_font('Times', '', 7)
         self.set_xy(.3, 8.4)
-        self.multi_cell(0, .12, txt = f'Well Logger Notes from {today}:\n{annotation}\nThe area of concern for casing inspection ranges from {top_line} - {bottom_line} feet.\n{statistics_notes} \n\nKey:\nHigh amplitudes indicate poor bonding or an absence of cement behind the casing. The opposite indicates the presence of cement.\nLonger return travel times indicate a signal coming from the formation wall, indicating good cement bonding. The opposite means there is likely poor bonding or no cement present. ', border=1, align='J')# Output justified text
+        self.multi_cell(0, .12, txt = f'Well Logger Notes from {today}:\n{annotation}\nThe area of concern for casing inspection ranges from {top_line} - {bottom_line} feet.\n{statistics_notes} \n\nKey:\n', border=1, align='J')# Output justified text
         self.set_font('', 'I')# Mention in italics
     def footer(self):
         self.set_xy(5, 0.5)
         self.set_font('Arial', 'I', 8)# Arial italic 8
         self.cell(0, 0, 'Page ' + str(self.page_no()) + ' of {nb}', 0, 0, 'C')# Page number
 
-print('Welcome to the Cement Bond Log Reader')
-path = '../cement_bond_logs' #path to files ../ represents the parent directory
+print('Welcome to the Well Log Reader')
+path = '../log_reader' #path to files ../ represents the parent directory
 # status = os.path.isdir(path)#check if path exists 
 # print(status)
 
@@ -185,21 +185,21 @@ while True:
         well_report_plot = 'annotate'
         top_line = int(input('What is the top depth, in feet, of your area of concern in the well log? '))
         bottom_line = int(input('What is the bottom depth, in feet, of your area of concern in the well log? '))
-        annotation = input('Write a sentence that describes your concern for this segment of casing. ')
+        annotation = input('Write a sentence that describes your concern for this segment of the well. ')
         # annotation = 'this is a bad spot in the cement'#this text is here for test purposes
         # top_line = 4000#this should be feet as a test parameter
         # bottom_line = 5000 #this should be feet as a test parameter    
-        x_min_vdl = min(log_readouts[pick_a_well]['TT3FT'])#time of signal return min x
-        x_max_vdl = max(log_readouts[pick_a_well]['TT3FT'])
-        x_min_amp = min(log_readouts[pick_a_well]['AMP3FT'])#amplitude of signal return min x
-        x_max_amp = max(log_readouts[pick_a_well]['AMP3FT'])
+        x_min_vdl = min(log_readouts[pick_a_well]['GGME'])#time of signal return min x
+        x_max_vdl = max(log_readouts[pick_a_well]['GGME'])
+        x_min_amp = min(log_readouts[pick_a_well]['DEN'])#amplitude of signal return min x
+        x_max_amp = max(log_readouts[pick_a_well]['DEN'])
         include_stats = input('Would you like to include statistics for amplitude and time of return across the area of concern? Yes or No ').lower()
         if include_stats == 'yes':
             df = las.df()#built-in lasio method to put data in panda df
-            df_selected_amp = df['AMP3FT']#select only the amplitude columns
+            df_selected_amp = df['DEN']#select only the amplitude columns
             df_selected_amp_rows = df_selected_amp[bottom_line:top_line]#select the length of casing along the area of concern https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html
             # print(df_selected_amp_rows)
-            df_selected_time= df['TT3FT']#select only the amplitude columns
+            df_selected_time= df['GGME']#select only the amplitude columns
             df_selected_time_rows = df_selected_time[bottom_line:top_line]    
             avg_amp_selected = np.around(np.average(df_selected_amp_rows))#average amplitude value of selected depths
             avg_time_selected = np.around(np.average(df_selected_time_rows))#average time of return value of selected depths
@@ -211,7 +211,7 @@ while True:
     elif command == 'statistics':
         #puts this stuff in a data frame with pandas
         df = las.df()#built-in lasio method to put data in panda df
-        df_selected = df[['AMP3FT', 'TT3FT']]#select only the important columns for exercise
+        df_selected = df[['GGME', 'DEN']]#select only the important columns for exercise
         # print(df_selected)#check those columns, how they appear
         statistics = df_selected.describe()#built in statistics method for pandas
         print(statistics)#check for values that are inconsistent with rock properties
@@ -219,6 +219,8 @@ while True:
         print(f"The version information for {las_files[pick_a_well]}: ")
         version_well = log_readouts[pick_a_well].version#fix this line so it takes user specified index
         print(version_well)
+        well_info_well = log_readouts[pick_a_well].well
+        print(well_info_well)
         table_of_well = log_readouts[pick_a_well].curves
         print(table_of_well)
     elif command == 'annotation report':
@@ -249,9 +251,9 @@ while True:
             print('///////////////////////////////////////////////////////////\nBefore saving the last figure, please visualize or annotate the well logs. \n///////////////////////////////////////////////////////////')
     elif command == 'help':
         print('Available commands:')
-        print('visualize  - begin by looking at a raw plot of the time of signal return and signal amplitude')
-        print('annotate  - draw horizontal lines, marking the area of concern in the cement bond log')
-        print('statistics - provide statistics of the .las well logs for amplitude and signal time')
+        print('visualize  - begin by looking at a raw plot of the compensated gamma ray and density')
+        print('annotate  - draw horizontal lines, marking the area of concern in the well log')
+        print('statistics - provide statistics of the .las well logs')
         print('save figure - save a copy of the last figure you had in the visualization pane ')
         print('log report - display the file version, mneumonics, and units of measure in the well log')
         print('annotation report - generates and saves a PDF of the annotated plot with your notes ')
